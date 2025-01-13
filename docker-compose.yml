@@ -32,6 +32,7 @@ services:
 
   logstash:
     image: docker.elastic.co/logstash/logstash:8.10.2
+    privileged: true
     environment:
       - pipeline.ecs_compatibility=disabled
       - xpack.monitoring.enabled=false
