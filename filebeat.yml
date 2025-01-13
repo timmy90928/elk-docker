@@ -1,0 +1,12 @@
+filebeat.inputs:
+  - type: log
+    paths:
+      - /usr/share/filebeat/access.log
+    fields:
+      type: access_log
+    multiline.pattern: '^\['
+    multiline.negate: true
+    multiline.match: after
+
+output.logstash:
+  hosts: ["logstash:5044"]

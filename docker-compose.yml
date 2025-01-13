@@ -1,0 +1,60 @@
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.2
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=false
+      - xpack.security.enrollment.enabled=true
+      # - xpack.security.transport.ssl.enabled=true
+      # - xpack.security.http.ssl.enabled=true
+      # - xpack.security.http.ssl.certificate=/usr/share/elasticsearch/http_ca.crt
+    
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+      - ./http_ca.crt:/usr/share/elasticsearch/http_ca.crt
+    ports:
+      - "9200:9200"
+    networks: 
+      - elk
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.10.2
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch-1:9200
+    ports:
+      - "5601:5601"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.10.2
+    environment:
+      - pipeline.ecs_compatibility=disabled
+      - xpack.monitoring.enabled=false
+      - xpack.monitoring.collection.enabled=true
+
+    volumes:
+      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./access.log:/usr/share/logstash/access.log
+      - ./http_ca.crt:/usr/share/logstash/http_ca.crt
+      - ./logstash.yml:/usr/share/logstash/config/logstash.yml
+    ports:
+      - "5044:5044"
+      - "5055:5055"
+      - "5056:5056"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
+volumes:
+  esdata:
+    driver: local
+
+networks:
+  elk:
+    driver: bridge

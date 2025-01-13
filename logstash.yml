@@ -1,0 +1,6 @@
+http.host: 0.0.0.0
+path.config: /usr/share/logstash/pipeline/logstash.conf
+pipeline.ecs_compatibility: disabled
+xpack.monitoring.elasticsearch.hosts:
+- http://elk-docker-elasticsearch-1:9200
+xpack.monitoring.enabled: false
