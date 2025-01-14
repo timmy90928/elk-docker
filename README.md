@@ -43,7 +43,7 @@ cd elk-docker
 ### Run
 ```bash
 # Start Docker Compose
-sudo docker-compose up -d
+sudo docker-compose up -d # -d 在後台執行容器
 
 # End Docker Compose
 sudo docker-compose down
