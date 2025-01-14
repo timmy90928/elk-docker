@@ -26,6 +26,7 @@ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] 
 sudo apt install docker-ce docker-ce-cli containerd.io
 docker --version
 ```
+https://hackmd.io/@sfagnU0PRimo51yNhxS4JQ/BybieZGuU
 
 ### docker-compose
 
