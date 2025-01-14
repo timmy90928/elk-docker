@@ -4,10 +4,12 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.10.2
     privileged: true
     environment:
+      
       - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - xpack.security.enabled=false
       - xpack.security.enrollment.enabled=true
+      - node.name=elasticsearch
       # - xpack.security.transport.ssl.enabled=true
       # - xpack.security.http.ssl.enabled=true
       # - xpack.security.http.ssl.certificate=/usr/share/elasticsearch/http_ca.crt
