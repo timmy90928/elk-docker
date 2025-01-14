@@ -1,10 +1,10 @@
 ELK For Docker Compose
 ======================
 
-目前執行的IP: 140.123.106.243
+> Reference: [docker-elk]
 
 Proxmox
--------
+=======
 
 ### Update Proxmox
 ```bash
@@ -43,14 +43,14 @@ cd elk-docker
 ### Run
 ```bash
 # Start Docker Compose
-docker-compose up -d
+sudo docker-compose up -d
 
 # End Docker Compose
-docker-compose down
+sudo docker-compose down
 ```
 
 Windows
---------
+=======
 1. Install WSL2
 1. Download and install [Docker](https://docs.docker.com/install/)
 1. Clone git
@@ -66,6 +66,22 @@ Windows
   # End Docker Compose
   docker-compose down
   ```
+
+Test
+====
+
+Filebeat
+--------
+Download Filebeat: [filebeat](https://www.elastic.co/downloads/beats/filebeat)
+
+```bash
+filebeat setup -e
+filebeat -c filebeat.yml -e
+```
+
+#### [filebeat.yml](/filebeat.yml)
+* filebeat.inputs的paths改成自己要偵測的路徑
+* setup.kibana的host 與 output.logstash的hosts 需改成 ELK sever 的ip
 
 Test Tcp And Http
 -----------------
@@ -91,6 +107,10 @@ ZZ,%{IPV4:ip},%{DATA:time},%{DATA:page},%{GREEDYDATA:msg}。
 # B1...
 B1,%{IPV4:ip},%{DATA:time},%{DATA:page},%{NUMBER:year},%{DATA}：(%{DATA:Department1}-%{DATA:Department2}，共%{NUMBER:count}系組|%{DATA:msg})。。
 ```
+
+Grok
+====
+
 常用的 Grok 模式筆記
 -------------------
 | 正則表達式     | 說明                                                       | 示例                       |
@@ -151,3 +171,6 @@ B1,%{IPV4:ip},%{DATA:time},%{DATA:page},%{NUMBER:year},%{DATA}：(%{DATA:Departm
 | IPV4     | 用於解析 IPv4 地址             |
 | IPV6     | 用於解析 IPv6 地址             |
 | HOST     | 用於解析主機名或 IP 地址       |
+
+
+[docker-elk]: https://github.com/deviantony/docker-elk
