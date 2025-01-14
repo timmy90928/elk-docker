@@ -35,10 +35,12 @@ sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 ```
 
-
-1. Install WSL2
-1. Download and install [Docker](https://docs.docker.com/install/)
-1. 在此路徑下執行
+### Clone git
+```
+git clone https://github.com/timmy90928/elk-docker.git
+cd elk-docker
+```
+### Run
 ```bash
 # Start Docker Compose
 docker-compose up -d
@@ -46,6 +48,24 @@ docker-compose up -d
 # End Docker Compose
 docker-compose down
 ```
+
+Windows
+--------
+1. Install WSL2
+1. Download and install [Docker](https://docs.docker.com/install/)
+1. Clone git
+  ```
+  git clone https://github.com/timmy90928/elk-docker.git
+  cd elk-docker
+  ```
+4. 在此路徑下執行
+  ```bash
+  # Start Docker Compose
+  docker-compose up -d
+  
+  # End Docker Compose
+  docker-compose down
+  ```
 
 Test Tcp And Http
 -----------------
